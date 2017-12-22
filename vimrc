@@ -27,6 +27,9 @@ Plug 'itchyny/lightline.vim'
 " ----- VCS
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+if has('signs')
+  Plug 'airblade/vim-gitgutter'
+endif
 
 " ----- Programming languages related
 Plug 'editorconfig/editorconfig-vim'
@@ -105,6 +108,9 @@ command! CloseBuffers :%bd | exe "normal! \<C-O>"
 
 
 " Lightline
+" No need to show current mode since we have lightline
+set noshowmode
+
 let g:lightline = {
 \  'colorscheme': 'onedark',
 \}
@@ -125,13 +131,13 @@ let g:lightline.component_type = {
 let g:lightline.active = {
 \  'left': [
 \    [ 'mode', 'paste' ],
-\    [ 'readonly', 'filename', 'modified' ],
+\    [ 'git' ],
 \    [ 'linter_errors', 'linter_warnings', 'linter_ok' ],
 \  ],
 \  'right': [
+\    [ 'filename' ],
 \    [ 'lineinfo' ],
-\    [ 'git' ],
-\    [ 'filetype' ],
+\    [ 'modified', 'readonly', 'filetype' ],
 \  ],
 \}
 
