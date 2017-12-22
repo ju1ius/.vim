@@ -24,6 +24,10 @@ Plug 'joshdick/onedark.vim'
 " ----- Statusline
 Plug 'itchyny/lightline.vim'
 
+" ----- VCS
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 " ----- Programming languages related
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sheerun/vim-polyglot'
@@ -112,6 +116,7 @@ let g:lightline.component_expand = {
 \  'linter_warnings': 'lightline#ale#warnings',
 \  'linter_errors': 'lightline#ale#errors',
 \  'linter_ok': 'lightline#ale#ok',
+\  'git': 'fugitive#statusline',
 \}
 let g:lightline.component_type = {
 \  'linter_warnings': 'warning',
@@ -122,7 +127,12 @@ let g:lightline.active = {
 \    [ 'mode', 'paste' ],
 \    [ 'readonly', 'filename', 'modified' ],
 \    [ 'linter_errors', 'linter_warnings', 'linter_ok' ],
-\  ]
+\  ],
+\  'right': [
+\    [ 'lineinfo' ],
+\    [ 'git' ],
+\    [ 'filetype' ],
+\  ],
 \}
 
 " NERDTree
