@@ -48,6 +48,7 @@ Plug 'mattn/emmet-vim'
 
 call plug#end()
 
+set hidden
 set directory=~/.vim/swap//,.
 set backupdir=~/.vim/backup//,.
 
@@ -61,7 +62,7 @@ endif
 
 " Line numbering
 set number relativenumber
-augroup numbertoggle
+augroup numberToggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
@@ -70,27 +71,35 @@ augroup END
 " Line wrapping
 set nowrap
 set breakindent
-autocmd FileType markdown,text setlocal wrap
-autocmd BufNewFile,BufRead * if empty(&filetype) | setlocal wrap | endif
+augroup ftWrap
+  autocmd!
+  autocmd FileType markdown,text setlocal wrap
+  autocmd BufNewFile,BufRead * if empty(&filetype) | setlocal wrap | endif
+augroup END
 
 " Tabs & Whitespace
 set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-au FileType php,python,c setlocal shiftwidth=4 softtabstop=4 tabstop=4 
+set shiftwidth=2 softtabstop=2
+augroup ftTabSizes
+  autocmd!
+  autocmd FileType php,python,c setlocal shiftwidth=4 softtabstop=4
+augroup END
 
 noremap <leader>y "+y
 noremap <leader>p "+p
 
 " Help File speedups, <enter> to follow tag, backspace for back
-au filetype help nnoremap <buffer><cr> <c-]>
-au filetype help nnoremap <buffer><bs> <c-T>
-au filetype help nnoremap <buffer>q :q<CR>
-au filetype help set nonumber
-set splitbelow " Split windows, ie Help, make more sense to me below
-set splitright " Split windows, ie Help, make more sense to me below
-"au filetype help wincmd _ " Maximze the help on open
+augroup helpMappings
+  autocmd!
+  autocmd FileType help nnoremap <buffer><cr> <c-]>
+  autocmd FileType help nnoremap <buffer><bs> <c-T>
+  autocmd FileType help nnoremap <buffer>q :q<CR>
+  autocmd FileType help setlocal nonumber
+augroup END
+" Split windows, ie Help, make more sense to me below
+set splitbelow
+" split to the right to avoid messing with NerdTree
+set splitright
 
 if has("termguicolors")
   set termguicolors
