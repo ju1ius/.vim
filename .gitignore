@@ -1,4 +1,12 @@
 *~
 *.swp
+*.old
+*.bak
+
+/.netrwhist
 
 /plugged
+/backup/*
+!/backup
+/swap/*
+!/swap
